@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
 	<head>
-		<meta charset="UTF-8">
-		<title>New Player - Baseball</title>
-		<link rel="stylesheet" href="/css/bootdtrap.css" />
-		<script src="/js/jquery.js"></script>
-		<script src="/js/bootstrap.js"></script>
+		<title>New Player</title>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" layout:fragment="content">
 			<h1>New Player</h1>
-			<form th:action="@{/players}" th:method="post">
-				<div class="form-group">
-					<label class="controll-label">名前</label>
-					<input class="form-controll" type="text" name="name" />
+			<form th:action="@{/players}" th:method="post" th:object="${player}">
+				<div class="form-group" th:classappend="${#fields.hasErrors('name')}? has-error">
+					<label class="control-label">名前</label>
+					<input class="form-control" type="text" th:field="*{name}" />
+					<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 				</div>
-				<div class="form-group">
-					<label class="controll-label">年齢</label>
-					<input class="form-controll" type="number" name="age" />
+				<div class="form-group" th:classappend="${#fields.hasErrors('age')}? has-error">
+					<label class="control-label">年齢</label>
+					<input class="form-control" type="number" th:field="*{age}" />
+					<span class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
 				</div>
-				<div class="form-group">
-					<label class="controll-label">チーム名</label>
-					<input class="form-controll" type="text" name="team" />
+				<div class="form-group" th:classappend="${#fields.hasErrors('team')}? has-error">
+					<label class="control-label">チーム名</label>
+					<input class="form-control" type="text" th:field="*{team}" />
+					<span class="text-danger" th:if="${#fields.hasErrors('team')}" th:errors="*{team}"></span>
 				</div>
-				<div class="form-group">
-					<label class="controll-label">守備位置</label>
-					<input class="form-controll" type="text" name="position" />
+				<div class="form-group" th:classappend="${#fields.hasErrors('position')}? has-error">
+					<label class="control-label">守備位置</label>
+					<input class="form-control" type="text" th:field="*{position}" />
+					<span class="text-danger" th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
 				</div>
 				<button class="btn btn-default" type="submit">作成</button>
 			</form>
